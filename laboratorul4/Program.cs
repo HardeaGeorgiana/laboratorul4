@@ -167,6 +167,14 @@ namespace laboratorul4
             Console.WriteLine("Introduceti numarul de coloane.");
             int m = int.Parse(Console.ReadLine());
 
+            int[,] mat1 = CitireMatrice(n, m);
+            AfisareMatrice(mat1);
+            int[,] mat2 = CitireMatrice(n, m);
+            AfisareMatrice(mat2);
+
+            int[,] rezultatImultire = Inmultire(mat1, mat2);
+
+
             static int[,] CitireMatrice(int n, int m)
             {
                 int[,] rezultat = new int[n, m];
@@ -179,6 +187,42 @@ namespace laboratorul4
                     }
                 }
                 return rezultat;
+            }
+            static void AfisareMatrice(int[,] matrice)
+            {
+                int n = matrice.GetLength(0);
+                int m = matrice.GetLength(1);
+                for (int x = 0; x < n; x++)
+                {
+                    for (int y = 0; y < m; y++)
+                    {
+                        Console.Write(matrice[x,y] + " ");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            static int[,] Inmultire(int[,] mat1, int[,] mat2)
+            {
+                int linieMatrice1 = mat1.GetLength(0);
+                int coloanaMatrice1 = mat1.GetLength(1);
+                int coloanaMatrice2 = mat2.GetLength(1);
+
+                int[,] mat3 = new int[linieMatrice1, coloanaMatrice2];
+
+                for (int x = 0; x < linieMatrice1; x++)
+                {
+                    for (int y = 0; y < coloanaMatrice2; y++)
+                    {
+                        mat3[x, y] = 0;
+                        for(int z = 0; z < coloanaMatrice1; z++)
+                        {
+                            mat3[x, y] = mat3[x, y] + mat1[x, z] * mat2[z, y];
+                        }
+                     
+                    }
+
+                }
+                    return mat3;
             }
         }
 
