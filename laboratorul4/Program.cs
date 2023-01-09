@@ -11,6 +11,8 @@ namespace laboratorul4
             //Ex3();
             //Ex4();
             //Ex5();
+            //Ex6(); 
+            //Ex7();
 
         }
 
@@ -22,13 +24,12 @@ namespace laboratorul4
 
 
             Console.WriteLine("Introduceti numarul de elementele ale vectorului.");
-            int contor = int.Parse(Console.ReadLine());
-            int[] vector = PopulareVector(contor);
+            int lungimeSir = int.Parse(Console.ReadLine());
+            int[] vector = PopulareVector(lungimeSir);
             int[] vectorInversat = InversareVector(vector);
 
             ImprimaVector(vectorInversat);
         }
-
 
         static void Ex2()
         {
@@ -133,32 +134,60 @@ namespace laboratorul4
             Console.WriteLine($"Suma este: {suma}");
         }
 
+        static void Ex6()
+        {
+            /*  Scrieti o functie recursiva care va calcula al n-lea element din sirul lui
+                Fibonacci, n fiind citit de la tastatura, apelati-o si afisati-I rezultatul.
+            */
+            Console.WriteLine("Introduceti un numar pentru a afla valoare lui in sirul Fibonaci.");
+            int numar = int.Parse(Console.ReadLine());
+            
+            Fibonacci(numar);
+            Console.WriteLine($"Numarul din sirul Fibonacci in pozitia aleasa este {Fibonacci(numar - 1) + Fibonacci(numar - 2)}");
+        }
+
+        static void Ex7()
+        {
+            /*   Scrieti o functie recursiva care pentru un numar “n” primit ca parametru, va
+                 afisa urmatoarea piramida a numerelor:
+                 1
+                 2 2
+                 3 3 3
+                 4 4 4 4
+                 …
+                 n n n …..n
+            */
+
+            Console.WriteLine("Introduceti numarul de coloane.");
+            int numar = int.Parse(Console.ReadLine());
+
+            //AfisarePiramida(numar);
+            PiramidaNumerelor(numar, 1);
+        }
+
 
         static int[] PopulareVector(int contor)
         {
             int[] newVector = new int[contor];
             for (int i = 0; i < contor; i++)
             {
-                int num = int.Parse(Console.ReadLine());
-                newVector[i] = num;
+                newVector[i] = int.Parse(Console.ReadLine());
             }
             return newVector;
         }
 
         static int[] InversareVector(int[] vector)
         {
-            int contor = vector.Length;
-            int[] newVector = new int[contor];
+            int[] newVector = new int[vector.Length];
             int j = 0;
 
-            for (int i = contor - 1; i >= 0; i--)
+            for (int i = vector.Length - 1; i >= 0; i--)
             {
-                int numar = vector[i];
-                newVector[j] = numar;
+                newVector[j] = vector[i];
                 j++;
             }
             return newVector;
-        }
+        } 
 
         static void ImprimaVector(int[] vector)
         {
@@ -167,7 +196,6 @@ namespace laboratorul4
                 Console.Write($"{vector[i]}, ");
             }
         }
-
 
         static int[,,] CitireMatrice(int n, int m, int k)
         {
@@ -231,7 +259,6 @@ namespace laboratorul4
             return celMaiMare;
         }
 
-
         static int[] PopulateVector(int contor)
         {
             int[] newVector = new int[contor];
@@ -243,7 +270,8 @@ namespace laboratorul4
             }
             return newVector;
         }
-        static void AfisareInOrdine(int contor, int[] vector)
+
+        static void AfisareInOrdine(int contor, int[] vector) 
         {
             if (contor - 1 < 0)
             {
@@ -292,6 +320,7 @@ namespace laboratorul4
             }
             return rezultat;
         }
+
         static void AfisareMatrice(int[,] matrice)
         {
             int n = matrice.GetLength(0);
@@ -330,6 +359,45 @@ namespace laboratorul4
                 }
             }
             return produsMatrice;
+        }
+
+        static int Fibonacci(int n)
+        {
+            if (n <= 0)
+            {
+                return 0;
+            }
+            else if (n == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return Fibonacci(n - 1) + Fibonacci(n - 2);
+            }
+        }
+
+        static void Afisare(int numar, int index)
+        {
+            if (index <= 0)
+            {
+                return;
+            }
+
+            Afisare(numar, index - 1);
+            Console.Write(numar);
+        }
+
+        static void PiramidaNumerelor(int numar, int index)
+        {
+            if (numar <= 0)
+                return;
+
+            Afisare(index, index);
+
+            Console.WriteLine();
+
+            PiramidaNumerelor(numar - 1, index + 1);
         }
     }
 }
